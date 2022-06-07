@@ -9,7 +9,7 @@ from bot_emoji import set_emoji
 from send_menu import send_self_profile, get_data_profiles
 
 
-async def check_buttons_menu_profile(message: types.Message, state: FSMContext, content_types=types.ContentType.CONTACT):
+async def check_buttons_menu_profile(message: types.Message, state: FSMContext):
     if message.text == '1':
         await bot.send_message(message.from_user.id, "Как тебя зовут ?")
         await fsm_change.nickname.set()
@@ -44,7 +44,6 @@ async def check_buttons_menu_profile(message: types.Message, state: FSMContext, 
         async with state.proxy() as data:
             await bot.send_message(message.from_user.id, set_emoji(':mag:'))
             data['id'] = data['sequence_dir_sort'].popitem()[0]
-
             info = db.get_acc_info(data['id'])
 
             # --- костыль для вывода названия направлений
@@ -55,9 +54,6 @@ async def check_buttons_menu_profile(message: types.Message, state: FSMContext, 
             sep = ', '
             await bot.send_photo(message.from_user.id, info[0],
                                  caption=f"{info[1]}, {info[2]} — {info[3]}\n{sep.join(temp_dir)}")
-
-
-
 
 
 async def change_name(message: types.Message):

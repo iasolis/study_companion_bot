@@ -14,6 +14,7 @@ async def send_self_profile(query):
     for direction in db.get_directions(query.from_user.id):
         temp_dir.append(temp[str(direction[0])])
     sep = ', '
+    print(info)
     await bot.send_photo(query.from_user.id, info[0],
                          caption=f"{info[1]}, {info[2]} — {info[3]}\n{sep.join(temp_dir)}")
     await bot.send_message(query.from_user.id, nav.menu_profile_text, reply_markup=nav.MenuProfile)
