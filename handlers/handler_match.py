@@ -26,7 +26,9 @@ async def check_buttons_match(message: types.Message, state: FSMContext):
             info = db.get_acc_info(data['id'])
 
             # --- костыль для вывода названия направлений
-            temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика'}
+            temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика', '4': 'Русский язык', '5': 'Химия',
+                    '6': 'История', '7': 'Обществознание', '8': 'Биология', '9': 'Английский', '10': 'Литература',
+                    '11': 'География'}
             temp_dir = []
             for direction in db.get_directions(data['id']):
                 temp_dir.append(temp[str(direction[0])])
@@ -40,7 +42,9 @@ async def check_buttons_match(message: types.Message, state: FSMContext):
             await bot.send_message(data['id'], 'Этот человек сказал мне, что хочет с тобой пообщаться:')
             info = db.get_acc_info(message.from_user.id)
             # --- костыль для вывода названия направлений
-            temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика'}
+            temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика', '4': 'Русский язык', '5': 'Химия',
+                    '6': 'История', '7': 'Обществознание', '8': 'Биология', '9': 'Английский', '10': 'Литература',
+                    '11': 'География'}
             temp_dir = []
             for direction in db.get_directions(message.from_user.id):
                 temp_dir.append(temp[str(direction[0])])
@@ -69,7 +73,9 @@ async def check_buttons_match(message: types.Message, state: FSMContext):
                 info = db.get_acc_info(data['id'])
 
                 # --- костыль для вывода названия направлений
-                temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика'}
+                temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика', '4': 'Русский язык', '5': 'Химия',
+                        '6': 'История', '7': 'Обществознание', '8': 'Биология', '9': 'Английский', '10': 'Литература',
+                        '11': 'География'}
                 temp_dir = []
                 for direction in db.get_directions(data['id']):
                     temp_dir.append(temp[str(direction[0])])
@@ -95,7 +101,9 @@ async def check_buttons_match(message: types.Message, state: FSMContext):
                 info = db.get_acc_info(data['id'])
 
                 # --- костыль для вывода названия направлений
-                temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика'}
+                temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика', '4': 'Русский язык', '5': 'Химия',
+                        '6': 'История', '7': 'Обществознание', '8': 'Биология', '9': 'Английский', '10': 'Литература',
+                        '11': 'География'}
                 temp_dir = []
                 for direction in db.get_directions(data['id']):
                     temp_dir.append(temp[str(direction[0])])
@@ -111,11 +119,15 @@ async def check_buttons_match_reply(callback_query: types.CallbackQuery, state: 
     # Считывание нажатий клавиатуры и запись данных в state.proxy
     if code == 1:
         await bot.delete_message(callback_query.from_user.id, callback_query.message.message_id)
+
         id_ = db.get_likes(callback_query.from_user.id)[0]
 
+        print(id_)
         info = db.get_acc_info(callback_query.from_user.id)
         # --- костыль для вывода названия направлений
-        temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика'}
+        temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика', '4': 'Русский язык', '5': 'Химия',
+                '6': 'История', '7': 'Обществознание', '8': 'Биология', '9': 'Английский', '10': 'Литература',
+                '11': 'География'}
         temp_dir = []
         for direction in db.get_directions(callback_query.from_user.id):
             temp_dir.append(temp[str(direction[0])])

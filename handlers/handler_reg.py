@@ -18,7 +18,7 @@ async def send_welcome(message: types.Message):
                                "\nДля начала стоит заполнить свою анкету ")
         await bot.send_message(message.from_user.id, set_emoji(":point_down:"))
 
-        await bot.send_message(message.from_user.id, "Напиши как мне тебя называть ?")
+        await bot.send_message(message.from_user.id, "Напиши как тебя зовут ?")
         db.add_acc(message.from_user.id)
         await fsm_reg.set_nickname.set()
     else:
@@ -67,27 +67,65 @@ async def handling_choice(callback_query: types.CallbackQuery, state: FSMContext
         code = int(code)
     # Считывание нажатий клавиатуры и запись данных в state.proxy
     if code == 1:
-        await bot.answer_callback_query(callback_query.id, text='матеша')
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Математика')
         async with state.proxy() as data:
             data["directions"]['Математика'] = '1'
     if code == 2:
-        await bot.answer_callback_query(callback_query.id, text='физика')
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Физика')
         async with state.proxy() as data:
             data["directions"]['Физика'] = '2'
     if code == 3:
-        await bot.answer_callback_query(callback_query.id, text='инфо')
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Информатика')
         async with state.proxy() as data:
             data["directions"]['Информатика'] = '3'
+
+    if code == 5:
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Химия')
+        async with state.proxy() as data:
+            data["directions"]['Химия'] = '5'
+    if code == 8:
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Биология')
+        async with state.proxy() as data:
+            data["directions"]['Биология'] = '8'
+    if code == 'A':
+        await bot.answer_callback_query(callback_query.id, text='Выбрана География')
+        async with state.proxy() as data:
+            data["directions"]['География'] = '11'
+
+    if code == 6:
+        await bot.answer_callback_query(callback_query.id, text='Выбрана История')
+        async with state.proxy() as data:
+            data["directions"]['История'] = '6'
+    if code == 7:
+        await bot.answer_callback_query(callback_query.id, text='Выбрано Обществознание')
+        async with state.proxy() as data:
+            data["directions"]['Обществознание'] = '7'
+    if code == 'E':
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Литература')
+        async with state.proxy() as data:
+            data["directions"]['Литература'] = '10'
+
     if code == 4:
+        await bot.answer_callback_query(callback_query.id, text='Выбран Русский язык')
+        async with state.proxy() as data:
+            data["directions"]['Русский язык'] = '4'
+    if code == 9:
+        await bot.answer_callback_query(callback_query.id, text='Выбран Англ. язык')
+        async with state.proxy() as data:
+            data["directions"]['Английский'] = '9'
+
+    if code == 'B':
         async with state.proxy() as data:
             sep = ', '
             await bot.answer_callback_query(callback_query.id, text=f"{sep.join(data['directions'].keys())}", show_alert=True)
-    if code == 5:
+    if code == 'C':
         async with state.proxy() as data:
             data['directions'].clear()
         await bot.answer_callback_query(callback_query.id, text='Очищены')
-    if code == 6:
+
+    if code == 'D':
         await bot.answer_callback_query(callback_query.id, text='Сохранено')
+        await bot.delete_message(callback_query.from_user.id, callback_query.message.message_id)
         # Запись данных анкеты в БД
         async with state.proxy() as data:
             db.set_nickname(callback_query.from_user.id, data['nickname'])

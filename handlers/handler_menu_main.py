@@ -22,7 +22,8 @@ async def check_buttons_main(message: types.Message, state: FSMContext):
             info = db.get_acc_info(data['id'])
 
             # --- костыль для вывода названия направлений
-            temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика'}
+            temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика', '4': 'Русский язык', '5': 'Химия',
+                    '6': 'История','7': 'Обществознание', '8': 'Биология', '9': 'Английский','10':'Литература','11':'География'}
             temp_dir = []
             for direction in db.get_directions(data['id']):
                 temp_dir.append(temp[str(direction[0])])
@@ -46,7 +47,9 @@ async def check_buttons_main(message: types.Message, state: FSMContext):
             db.set_status_acc(message.from_user.id, 1)
 
     if message.text == '3':
-        await bot.send_message(message.from_user.id,'Если ты не знал, мой отец - Есус')
+        await bot.send_message(message.from_user.id,'Данный бот разработан при выполнении Выпускной квалификационной работы \n '
+                                                    'Студент группы 4816, Ослаповский И. А.\n '
+                                                    'Почта для отзывов и предложений: bul.reyn@mail.ru ')
 
 
 # --- Функция регистрации обработчиков ---

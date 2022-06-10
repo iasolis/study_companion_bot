@@ -9,12 +9,13 @@ import operator
 async def send_self_profile(query):
     info = db.get_acc_info(query.from_user.id)
     # --- костыль для вывода названия направлений
-    temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика'}
+    temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика', '4': 'Русский язык', '5': 'Химия',
+            '6': 'История', '7': 'Обществознание', '8': 'Биология', '9': 'Английский', '10': 'Литература',
+            '11': 'География'}
     temp_dir = []
     for direction in db.get_directions(query.from_user.id):
         temp_dir.append(temp[str(direction[0])])
     sep = ', '
-    print(info)
     await bot.send_photo(query.from_user.id, info[0],
                          caption=f"{info[1]}, {info[2]} — {info[3]}\n{sep.join(temp_dir)}")
     await bot.send_message(query.from_user.id, nav.menu_profile_text, reply_markup=nav.MenuProfile)

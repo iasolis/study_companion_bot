@@ -73,14 +73,14 @@ class Database:
 
     def get_likes(self, user_id_was_liked):
         with self.connection:
-            return self.cursor.execute("SELECT id_liked FROM 'likes' WHERE id_was_liked = ?", (user_id_was_liked,)).fetchone
+            return self.cursor.execute("SELECT id_liked FROM 'likes' WHERE id_was_liked = ?", (user_id_was_liked,)).fetchone()
 
     # --- del func ---
     def del_directions(self, user_id):
         with self.connection:
             return self.cursor.execute("DELETE FROM 'user_directions' WHERE user_id = ?", (user_id,))
 
-    def del_likes(self, user_id_liked,user_id_was_liked):
+    def del_likes(self, user_id_liked, user_id_was_liked):
         with self.connection:
             return self.cursor.execute("DELETE FROM 'likes' WHERE id_liked = ? AND id_was_liked = ? ", (user_id_liked, user_id_was_liked))
 

@@ -5,9 +5,7 @@ from bot_emoji import set_emoji
 btnChangeNameAge = KeyboardButton('1')
 btnChangeImg = KeyboardButton('2')
 btnChangeSummary = KeyboardButton('3')
-#
 btnChangeEdu = KeyboardButton('4')
-#
 btnChangeProfile = KeyboardButton('5')
 
 btnStartMatching = KeyboardButton('Смотреть анкеты '+set_emoji(":eyes:"))
@@ -30,14 +28,30 @@ menu_main_text1 = "1. Профиль. \n"+\
 
 
 # --- Direction Selection Menu ---
-btn_dir_sel_1 = InlineKeyboardButton('Матем', callback_data='btn1')
-btn_dir_sel_2 = InlineKeyboardButton('Физика', callback_data='btn2')
-btn_dir_sel_3 = InlineKeyboardButton('Инфо', callback_data='btn3')
-btn_dir_sel_4 = InlineKeyboardButton('Проверить', callback_data='btn4')
-btn_dir_sel_5 = InlineKeyboardButton('Удалить', callback_data='btn5')
-btn_dir_sel_6 = InlineKeyboardButton('Сохранить', callback_data='btn6')
+btn_dir_sel_1 = InlineKeyboardButton('Математика', callback_data='btn1') #
+btn_dir_sel_2 = InlineKeyboardButton('Физика', callback_data='btn2')#
+btn_dir_sel_3 = InlineKeyboardButton('Информатика', callback_data='btn3') #
+
+btn_dir_sel_4 = InlineKeyboardButton('Русский язык', callback_data='btn4')#
+btn_dir_sel_5 = InlineKeyboardButton('Химия', callback_data='btn5') #
+btn_dir_sel_6 = InlineKeyboardButton('История', callback_data='btn6') #
+
+btn_dir_sel_7 = InlineKeyboardButton('Обществознание', callback_data='btn7')#
+btn_dir_sel_8 = InlineKeyboardButton('Биология', callback_data='btn8')#
+btn_dir_sel_9 = InlineKeyboardButton('Английский', callback_data='btn9')
+
+btn_dir_sel_E = InlineKeyboardButton('Литература', callback_data='btnE')
+btn_dir_sel_A = InlineKeyboardButton('География', callback_data='btnA') #
+
+btn_dir_sel_B = InlineKeyboardButton('Проверить', callback_data='btnB')
+btn_dir_sel_C = InlineKeyboardButton('Удалить', callback_data='btnC')
+btn_dir_sel_D = InlineKeyboardButton('Сохранить', callback_data='btnD')
+
 MenuDirectionSelection = InlineKeyboardMarkup().row(btn_dir_sel_1, btn_dir_sel_2,
-                                                    btn_dir_sel_3).row(btn_dir_sel_4, btn_dir_sel_5, btn_dir_sel_6)
+                                                    btn_dir_sel_3).row(btn_dir_sel_5, btn_dir_sel_8,
+                                                    btn_dir_sel_A).row(btn_dir_sel_6, btn_dir_sel_7,
+                                                    btn_dir_sel_E).row(btn_dir_sel_4,
+                                                    btn_dir_sel_9).row(btn_dir_sel_B, btn_dir_sel_C, btn_dir_sel_D)
 
 # --- Match Menu ---
 btnLike = KeyboardButton(set_emoji(":+1:"))

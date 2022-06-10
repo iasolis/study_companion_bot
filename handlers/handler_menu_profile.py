@@ -47,7 +47,9 @@ async def check_buttons_menu_profile(message: types.Message, state: FSMContext):
             info = db.get_acc_info(data['id'])
 
             # --- костыль для вывода названия направлений
-            temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика'}
+            temp = {'1': 'Математика', '2': 'Физика', '3': 'Информатика', '4': 'Русский язык', '5': 'Химия',
+                    '6': 'История', '7': 'Обществознание', '8': 'Биология', '9': 'Английский', '10': 'Литература',
+                    '11': 'География'}
             temp_dir = []
             for direction in db.get_directions(data['id']):
                 temp_dir.append(temp[str(direction[0])])
@@ -87,29 +89,64 @@ async def change_directions(callback_query: types.CallbackQuery, state: FSMConte
 
     # Считывание нажатий клавиатуры и запись данных в state.proxy
     if code == 1:
-        await bot.answer_callback_query(callback_query.id, text='матеша')
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Математика')
         async with state.proxy() as data:
             data["directions"]['Математика'] = '1'
-
     if code == 2:
-        await bot.answer_callback_query(callback_query.id, text='физика')
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Физика')
         async with state.proxy() as data:
             data["directions"]['Физика'] = '2'
     if code == 3:
-        await bot.answer_callback_query(callback_query.id, text='инфо')
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Информатика')
         async with state.proxy() as data:
             data["directions"]['Информатика'] = '3'
+
+    if code == 5:
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Химия')
+        async with state.proxy() as data:
+            data["directions"]['Химия'] = '5'
+    if code == 8:
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Биология')
+        async with state.proxy() as data:
+            data["directions"]['Биология'] = '8'
+    if code == 'A':
+        await bot.answer_callback_query(callback_query.id, text='Выбрана География')
+        async with state.proxy() as data:
+            data["directions"]['География'] = '11'
+
+    if code == 6:
+        await bot.answer_callback_query(callback_query.id, text='Выбрана История')
+        async with state.proxy() as data:
+            data["directions"]['История'] = '6'
+    if code == 7:
+        await bot.answer_callback_query(callback_query.id, text='Выбрано Обществознание')
+        async with state.proxy() as data:
+            data["directions"]['Обществознание'] = '7'
+    if code == 'E':
+        await bot.answer_callback_query(callback_query.id, text='Выбрана Литература')
+        async with state.proxy() as data:
+            data["directions"]['Литература'] = '10'
+
     if code == 4:
+        await bot.answer_callback_query(callback_query.id, text='Выбран Русский язык')
+        async with state.proxy() as data:
+            data["directions"]['Русский язык'] = '4'
+    if code == 9:
+        await bot.answer_callback_query(callback_query.id, text='Выбран Англ. язык')
+        async with state.proxy() as data:
+            data["directions"]['Английский'] = '9'
+
+    if code == 'B':
         async with state.proxy() as data:
             sep = ', '
             await bot.answer_callback_query(callback_query.id, text=f"{sep.join(data['directions'].keys())}",
                                             show_alert=True)
-    if code == 5:
+    if code == 'C':
         async with state.proxy() as data:
             data["directions"].clear()
         await bot.answer_callback_query(callback_query.id, text='Очищены')
 
-    if code == 6:
+    if code == 'D':
         await bot.answer_callback_query(callback_query.id, text='Сохранено')
         await bot.delete_message(callback_query.from_user.id, callback_query.message.message_id)
         async with state.proxy() as data:
@@ -120,9 +157,6 @@ async def change_directions(callback_query: types.CallbackQuery, state: FSMConte
         await send_self_profile(callback_query)
 
 
-
-
-
 # --- Функция регистрации обработчиков ---
 def handler_menu_profile(dp: Dispatcher):
     dp.register_message_handler(check_buttons_menu_profile, text='1', state=fsm_prof.menu_profile)
@@ -130,6 +164,15 @@ def handler_menu_profile(dp: Dispatcher):
     dp.register_message_handler(check_buttons_menu_profile, text='3', state=fsm_prof.menu_profile)
     dp.register_message_handler(check_buttons_menu_profile, text='4', state=fsm_prof.menu_profile)
     dp.register_message_handler(check_buttons_menu_profile, text='5', state=fsm_prof.menu_profile)
+    dp.register_message_handler(check_buttons_menu_profile, text='6', state=fsm_prof.menu_profile)
+    dp.register_message_handler(check_buttons_menu_profile, text='7', state=fsm_prof.menu_profile)
+    dp.register_message_handler(check_buttons_menu_profile, text='8', state=fsm_prof.menu_profile)
+    dp.register_message_handler(check_buttons_menu_profile, text='9', state=fsm_prof.menu_profile)
+    dp.register_message_handler(check_buttons_menu_profile, text='E', state=fsm_prof.menu_profile)
+    dp.register_message_handler(check_buttons_menu_profile, text='A', state=fsm_prof.menu_profile)
+    dp.register_message_handler(check_buttons_menu_profile, text='B', state=fsm_prof.menu_profile)
+    dp.register_message_handler(check_buttons_menu_profile, text='C', state=fsm_prof.menu_profile)
+    dp.register_message_handler(check_buttons_menu_profile, text='D', state=fsm_prof.menu_profile)
 
     dp.register_message_handler(check_buttons_menu_profile, text='Смотреть анкеты ' + set_emoji(":eyes:"), state=fsm_prof.menu_profile)
 
