@@ -1,11 +1,11 @@
-from bot import bot, db
+from src.bot import bot, db
 from aiogram.dispatcher import FSMContext
 from aiogram import types, Dispatcher
-from states import Match as fsm_match, Main as fsm_main, Profile as fsm_prof
+from src.states import Match as fsm_match, Main as fsm_main, Profile as fsm_prof
 
-from send_menu import get_data_profiles, send_self_profile
-import markups as nav
-from bot_emoji import set_emoji
+from src.send_menu import get_data_profiles
+from src import markups as nav
+from src.bot_emoji import set_emoji
 
 
 async def check_buttons_match(message: types.Message, state: FSMContext):
@@ -92,7 +92,6 @@ async def check_buttons_match(message: types.Message, state: FSMContext):
         if flag == 0:
             await bot.send_message(message.from_user.id, 'Анкеты закончились, попробуй посмотреть ещё раз',
                                    reply_markup=nav.MenuSee)
-
         else:
             async with state.proxy() as data:
                 await bot.send_message(message.from_user.id, set_emoji(':mag:'))

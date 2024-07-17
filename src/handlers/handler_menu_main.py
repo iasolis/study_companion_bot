@@ -1,11 +1,11 @@
-from bot import bot, db
+from src.bot import bot, db
 from aiogram.dispatcher import FSMContext
 from aiogram import types, Dispatcher
-from states import Match as fsm_match, Main as fsm_main
+from src.states import Match as fsm_match, Main as fsm_main
 
-from send_menu import send_self_profile, get_data_profiles
-import markups as nav
-from bot_emoji import set_emoji
+from src.send_menu import send_self_profile, get_data_profiles
+from src import markups as nav
+from src.bot_emoji import set_emoji
 
 
 async def check_buttons_main(message: types.Message, state: FSMContext):

@@ -1,5 +1,5 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
-from bot_emoji import set_emoji
+from src.bot_emoji import set_emoji
 
 # --- Profile Menu ---
 btnChangeNameAge = KeyboardButton('1')

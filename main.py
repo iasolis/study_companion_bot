@@ -1,16 +1,16 @@
 import logging
-from bot import dp
+from src.bot import dp
 from aiogram import executor
 import sys
 
-sys.path.insert(0, '/handlers/handler_reg.py')
-sys.path.insert(0, '/handlers/handler_menu_profile.py')
-sys.path.insert(0, '/handlers/handler_menu_main.py')
-sys.path.insert(0, '/handlers/handler_match.py')
-from handlers import handler_reg, handler_menu_profile, handler_menu_main, handler_match
+sys.path.insert(0, 'src/handlers/handler_reg.py')
+sys.path.insert(0, 'src/handlers/handler_menu_profile.py')
+sys.path.insert(0, 'src/handlers/handler_menu_main.py')
+sys.path.insert(0, 'src/handlers/handler_match.py')
+from src.handlers import handler_menu_profile, handler_match, handler_menu_main, handler_reg
 
 
-async def start_up(_):
+async def start_up():
     print("BOT Online!")
     logging.basicConfig(level=logging.INFO)
 

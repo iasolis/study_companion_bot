@@ -1,12 +1,11 @@
-from bot import bot, db
+from src.bot import bot, db
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
-from states import Profile as fsm_prof, ChangeProfile as fsm_change, Registration as fsm_reg, Match as fsm_match
-from aiogram.utils.markdown import hlink
+from src.states import Profile as fsm_prof, ChangeProfile as fsm_change, Registration as fsm_reg, Match as fsm_match
 
-import markups as nav
-from bot_emoji import set_emoji
-from send_menu import send_self_profile, get_data_profiles
+from src import markups as nav
+from src.bot_emoji import set_emoji
+from src.send_menu import send_self_profile, get_data_profiles
 
 
 async def check_buttons_menu_profile(message: types.Message, state: FSMContext):

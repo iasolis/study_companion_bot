@@ -1,7 +1,6 @@
-from bot import bot, db
+from src.bot import bot, db
 from states import Profile as fsm_prof
-import markups as nav
-# from bot_emoji import set_emoji
+from src import markups as nav
 from difflib import SequenceMatcher
 import operator
 
